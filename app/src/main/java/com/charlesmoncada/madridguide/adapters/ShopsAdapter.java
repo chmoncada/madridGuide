@@ -2,6 +2,7 @@ package com.charlesmoncada.madridguide.adapters;
 
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +18,13 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopRowViewHolder> {
 
     private final LayoutInflater layoutInflater;
     private final Shops shops;
+
+    // listener interface
+    public interface OnElementClick {
+        public void clickedOn(Shop shop, int position);
+    }
+
+    private OnElementClick listener;
 
     public ShopsAdapter(Shops shops, Context context) {
         this.shops = shops;
@@ -35,7 +43,7 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopRowViewHolder> {
     @Override
     public void onBindViewHolder(ShopRowViewHolder row, final int position) {
 
-        Shop shop = shops.get(position);
+        final Shop shop = shops.get(position);
 
         row.setShop(shop);
 
@@ -43,6 +51,9 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopRowViewHolder> {
             @Override
             public void onClick(View view) {
                 Log.v("CHARLES", "Celda "+ position +": me tocaron");
+                if (ShopsAdapter.this.listener != null) {
+                    listener.clickedOn(shop, position);
+                }
             }
         });
 
@@ -51,5 +62,9 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopRowViewHolder> {
     @Override
     public int getItemCount() {
         return (int) shops.size();
+    }
+
+    public void setOnElementClickListener(@NonNull final OnElementClick listener) {
+        this.listener = listener;
     }
 }

@@ -59,7 +59,7 @@ public class ShopDAO implements DAOPersistable<Shop> {
 
     private ContentValues getContentValues(Shop shop) {
 
-        ContentValues contentValues = new ContentValues();
+        final ContentValues contentValues = new ContentValues();
 
         contentValues.put(KEY_SHOP_ADDRESS, shop.getAddress());
         contentValues.put(KEY_SHOP_DESCRIPTION, shop.getDescription());
@@ -153,5 +153,13 @@ public class ShopDAO implements DAOPersistable<Shop> {
         } while (c.moveToNext());
 
         return shops;
+    }
+
+    public Cursor queryCursor(long id) {
+        Cursor c = db.query(TABLE_SHOP, ALL_COLUMNS, "ID = " + id, null, null, null, KEY_SHOP_ID);
+        if (c != null && c.getCount() > 0) {
+            c.moveToFirst();
+        }
+        return c;
     }
 }
