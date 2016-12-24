@@ -1,6 +1,8 @@
 package com.charlesmoncada.madridguide.model;
 
-public class Shop {
+import java.io.Serializable;
+
+public class Shop implements Serializable{
 
     private long id;
     private String name;

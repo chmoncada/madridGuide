@@ -1,4 +1,4 @@
-package com.charlesmoncada.madridguide;
+package com.charlesmoncada.madridguide.fragments;
 
 
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.charlesmoncada.madridguide.R;
 import com.charlesmoncada.madridguide.adapters.ShopsAdapter;
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.model.Shops;
@@ -20,6 +21,8 @@ public class ShopsFragment extends Fragment {
     private ShopsAdapter adapter;
     // ANADIDO CLASE 4.1
     private Shops shops;
+
+    private ShopsAdapter.OnElementClick<Shop> listener;
 
     public ShopsFragment() {
         // Required empty public constructor
@@ -43,13 +46,17 @@ public class ShopsFragment extends Fragment {
         adapter = new ShopsAdapter(shops, getActivity());
         shopsRecyclerView.setAdapter(adapter);
 
-        adapter.setOnElementClickListener(new ShopsAdapter.OnElementClick() {
+        adapter.setOnElementClickListener(new ShopsAdapter.OnElementClick<Shop>() {
 
             @Override
-            public void clickedOn(Shop shop, int position) {
+            public void elementClicked(Shop shop, int position) {
                 // TODO: show shop detail
                 Log.v("FRAGMENT", "ME DEBERIA IR A LA OTRA VISTA DE DETALLE");
+                if (listener != null) {
+                    listener.elementClicked(shop, position);
+                }
             }
+
         });
 
     }
@@ -72,6 +79,10 @@ public class ShopsFragment extends Fragment {
         this.shops = shops;
 
         updateUI();
+    }
+
+    public  void setOnElementClickListener(ShopsAdapter.OnElementClick<Shop> listener) {
+        this.listener = listener;
     }
 
 }

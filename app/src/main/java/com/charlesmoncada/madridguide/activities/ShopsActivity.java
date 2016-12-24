@@ -1,14 +1,19 @@
 package com.charlesmoncada.madridguide.activities;
 
-import android.app.LoaderManager;
-import android.content.Loader;
+
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 
 import com.charlesmoncada.madridguide.R;
-import com.charlesmoncada.madridguide.ShopsFragment;
+import com.charlesmoncada.madridguide.adapters.ShopsAdapter;
+import com.charlesmoncada.madridguide.fragments.ShopsFragment;
+import com.charlesmoncada.madridguide.manager.db.DBConstants;
 import com.charlesmoncada.madridguide.manager.db.ShopDAO;
+import com.charlesmoncada.madridguide.manager.db.provider.MadridGuideProvider;
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.model.Shops;
 
@@ -25,10 +30,20 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
 
         shopsFragment = (ShopsFragment) getSupportFragmentManager().findFragmentById(R.id.activity_shops_fragment_shops);
 
-        getShops();
+        //getShops();
 
+        shopsFragment.setOnElementClickListener(new ShopsAdapter.OnElementClick<Shop>() {
+            @Override
+            public void elementClicked(Shop element, int position) {
+
+            }
+        });
+
+        LoaderManager loaderManager = getSupportLoaderManager();
+        loaderManager.initLoader(0, null, this);
     }
 
+    // 1st attempt at async cursor load: works!
     public void getShops() {
         new Thread(new Runnable() {
             @Override
@@ -48,15 +63,28 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
         });
     }
 
+
     @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return null;
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        CursorLoader loader = new CursorLoader(this,
+                MadridGuideProvider.SHOPS_URI,
+                DBConstants.ALL_COLUMNS,            // projection
+                null,                               // where
+                null,                               // campos del where
+                null);                              // order
+
+        return loader;
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 
+        final Shops shops = ShopDAO.getShops(data);
+
+        shopsFragment.setShops(shops);
     }
+
+
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {

@@ -61,7 +61,20 @@ public class MadridGuideProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(Uri uri) {
-        return null;
+
+        String type = null;
+
+        switch (uriMatcher.match(uri)) {
+            case SINGLE_SHOP :
+                type = "vnd.android.cursor.item/vnd.com.charlesmoncada.madridguide.provider";
+                break;
+            case ALL_SHOPS:
+                type = "vnd.android.cursor.dir/vnd.com.charlesmoncada.madridguide.provider";
+                break;
+            default: break;
+        }
+
+        return type;
     }
 
     @Nullable
@@ -70,8 +83,7 @@ public class MadridGuideProvider extends ContentProvider {
 
         ShopDAO dao = new ShopDAO(getContext());
 
-        Shop shop = new Shop(contentValues.getAsInteger("id"), contentValues.getAsString("name"));
-        shop.setImageUrl(contentValues.getAsString("imageURL"));
+        Shop shop = ShopDAO.getShopFromContentValues(contentValues);
 
         long id = dao.insert(shop);
         // Construct and return the URI of the newly inserted row.

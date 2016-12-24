@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/activity_shops_fragment_shops"
-        android:name="com.charlesmoncada.madridguide.ShopsFragment"
+        android:name="com.charlesmoncada.madridguide.fragments.ShopsFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
