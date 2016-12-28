@@ -25,6 +25,11 @@ public class NetworkManager {
         public void getShopEntitiesDidFail();
     }
 
+    public interface GetActivitiesListener {
+        public void getActivityEntitiesSuccess(List<ActivityEntity> result);
+        public void getActivityEntitiesDidFail();
+    }
+
     WeakReference<Context> context;
 
     public NetworkManager(Context context) {
@@ -74,5 +79,47 @@ public class NetworkManager {
         return result;
     }
 
+    public void getActivitiesFromServer(final GetActivitiesListener listener) {
+        RequestQueue queue = Volley.newRequestQueue(context.get());
+        String url = context.get().getString(R.string.activities_url);
 
+        StringRequest request = new StringRequest(
+                url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("JSON", response);
+                        List<ActivityEntity> activityResponse = parseActivityResponse(response);
+                        if (listener != null) {
+                            listener.getActivityEntitiesSuccess(activityResponse);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (listener != null) {
+                            listener.getActivityEntitiesDidFail();
+                        }
+                    }
+                }
+        );
+        queue.add(request);
+    }
+
+    private List<ActivityEntity> parseActivityResponse(String response) {
+        List<ActivityEntity> result = null;
+        try {
+            Reader reader = new StringReader(response);
+            Gson gson = new GsonBuilder().create();
+
+            ActivityResponse activityResponse = gson.fromJson(reader, ActivityResponse.class);
+            result = activityResponse.result;
+            //Log.v("result", String.valueOf(result));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
 }

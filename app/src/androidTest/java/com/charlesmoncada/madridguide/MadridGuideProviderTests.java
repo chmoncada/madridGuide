@@ -16,7 +16,7 @@ public class MadridGuideProviderTests extends AndroidTestCase {
     public void testQueryAllShops() {
         ContentResolver cr = getContext().getContentResolver();
 
-        Cursor c = cr.query(MadridGuideProvider.SHOPS_URI, DBConstants.ALL_COLUMNS, null, null, null);
+        Cursor c = cr.query(MadridGuideProvider.SHOPS_URI, DBConstants.TABLE_SHOP_ALL_COLUMNS, null, null, null);
         assertNotNull(c);
 
     }
@@ -25,14 +25,14 @@ public class MadridGuideProviderTests extends AndroidTestCase {
 
         final ContentResolver cr = getContext().getContentResolver();
 
-        final Cursor beforeCursor = cr.query(MadridGuideProvider.SHOPS_URI, DBConstants.ALL_COLUMNS, null, null, null);
+        final Cursor beforeCursor = cr.query(MadridGuideProvider.SHOPS_URI, DBConstants.TABLE_SHOP_ALL_COLUMNS, null, null, null);
         final int beforeCount = beforeCursor.getCount();
 
         final Shop shop = new Shop(1, "Little shop of horrors!");
         final Uri insertedUri = cr.insert(MadridGuideProvider.SHOPS_URI, ShopDAO.getContentValues(shop));
         assertNotNull(insertedUri);
 
-        final Cursor afterCursor = cr.query(MadridGuideProvider.SHOPS_URI, DBConstants.ALL_COLUMNS, null, null, null);
+        final Cursor afterCursor = cr.query(MadridGuideProvider.SHOPS_URI, DBConstants.TABLE_SHOP_ALL_COLUMNS, null, null, null);
         final int afterCount = afterCursor.getCount();
 
         assertEquals(beforeCount + 1, afterCount);
@@ -45,12 +45,12 @@ public class MadridGuideProviderTests extends AndroidTestCase {
         final Shop shop = new Shop(1, "Star Wars");
         final Uri insertedUri = cr.insert(MadridGuideProvider.SHOPS_URI, ShopDAO.getContentValues(shop));
 
-        final Cursor beforeCursor = cr.query(MadridGuideProvider.SHOPS_URI, DBConstants.ALL_COLUMNS, null, null,null);
+        final Cursor beforeCursor = cr.query(MadridGuideProvider.SHOPS_URI, DBConstants.TABLE_SHOP_ALL_COLUMNS, null, null,null);
         final int beforeCount = beforeCursor.getCount();
 
         cr.delete(insertedUri, null, null );
 
-        final Cursor afterCursor = cr.query(MadridGuideProvider.SHOPS_URI, DBConstants.ALL_COLUMNS, null, null,null);
+        final Cursor afterCursor = cr.query(MadridGuideProvider.SHOPS_URI, DBConstants.TABLE_SHOP_ALL_COLUMNS, null, null,null);
         final int afterCount = afterCursor.getCount();
 
         assertEquals(afterCount + 1, beforeCount);

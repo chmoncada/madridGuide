@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.charlesmoncada.madridguide.R;
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.util.Constants;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,11 +18,11 @@ public class ShopDetailActivity extends AppCompatActivity {
 
     private Shop shop;
 
-    @BindView(R.id.activity_shop_detail_logo_image)
-    ImageView logoImage;
+    @BindView(R.id.activity_shop_detail_shop_logo_image)
+    ImageView shopLogoImage;
 
     @BindView(R.id.activity_shop_detail_shop_name_text)
-    TextView nameText;
+    TextView shopNameText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +31,25 @@ public class ShopDetailActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        shop = (Shop) intent.getSerializableExtra(Constants.INTENT_KEY_DETAILS_SHOP);
+        getDetailShopFromCallingIntent();
 
+        updateUI();
+
+    }
+
+    private void getDetailShopFromCallingIntent() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            shop = (Shop) intent.getSerializableExtra(Constants.INTENT_KEY_DETAILS_SHOP);
+        }
+    }
+
+    private void updateUI() {
+
+        shopNameText.setText(shop.getName());
+        Picasso.with(this)
+                .load(shop.getLogoImgUrl())
+                .into(shopLogoImage);
 
     }
 }

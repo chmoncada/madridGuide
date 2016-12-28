@@ -3,6 +3,7 @@ package com.charlesmoncada.madridguide.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.charlesmoncada.madridguide.R;
 import com.charlesmoncada.madridguide.adapters.ShopsAdapter;
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.model.Shops;
+import com.charlesmoncada.madridguide.views.OnElementClick;
 
 
 public class ShopsFragment extends Fragment {
@@ -22,7 +24,7 @@ public class ShopsFragment extends Fragment {
     // ANADIDO CLASE 4.1
     private Shops shops;
 
-    private ShopsAdapter.OnElementClick<Shop> listener;
+    private OnElementClick<Shop> listener;
 
     public ShopsFragment() {
         // Required empty public constructor
@@ -35,18 +37,22 @@ public class ShopsFragment extends Fragment {
         shopsRecyclerView = (RecyclerView) view.findViewById(R.id.shops_recycler_view);
         shopsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        activity.getSupportActionBar().setTitle(R.string.shops_activity_title);
+        //activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         //updateUI();
 
         return view;
     }
 
     private void updateUI() {
-        //Shops shops = Shops.build(getShops());
 
         adapter = new ShopsAdapter(shops, getActivity());
         shopsRecyclerView.setAdapter(adapter);
 
-        adapter.setOnElementClickListener(new ShopsAdapter.OnElementClick<Shop>() {
+        adapter.setOnElementClickListener(new OnElementClick<Shop>() {
 
             @Override
             public void elementClicked(Shop shop, int position) {
@@ -61,16 +67,6 @@ public class ShopsFragment extends Fragment {
 
     }
 
-//    private List<Shop> getShops() {
-//        List<Shop> data = new ArrayList<>();
-//
-//        for (int i = 0; i<100; i++) {
-//            data.add(new Shop(i, "Tienda " + i));
-//        }
-//
-//        return data;
-//    }
-
     private Shops getShops() {
         return shops;
     }
@@ -81,7 +77,11 @@ public class ShopsFragment extends Fragment {
         updateUI();
     }
 
-    public  void setOnElementClickListener(ShopsAdapter.OnElementClick<Shop> listener) {
+    public OnElementClick<Shop> getListener() {
+        return listener;
+    }
+
+    public  void setOnElementClickListener(OnElementClick<Shop> listener) {
         this.listener = listener;
     }
 

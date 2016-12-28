@@ -1,7 +1,7 @@
 package com.charlesmoncada.madridguide.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -15,6 +15,10 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.activity_main_shops_button)
     Button shopsButton;
+
+    @BindView(R.id.activity_main_activities_button)
+    Button activitiesButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +35,21 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigator.navigateFromMainActivityToShopsActivity(MainActivity.this);
+
+                switch (view.getId()) {
+                    case R.id.activity_main_shops_button:
+                        Navigator.navigateFromMainActivityToShopsActivity(MainActivity.this);
+                        break;
+                    case R.id.activity_main_activities_button:
+                        Navigator.navigateFromMainActivityToActivitiesActivity(MainActivity.this);
+                        break;
+                }
+
+
             }
         };
+
         shopsButton.setOnClickListener(listener);
+        activitiesButton.setOnClickListener(listener);
     }
 }

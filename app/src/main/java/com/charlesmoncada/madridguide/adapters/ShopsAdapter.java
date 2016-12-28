@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.charlesmoncada.madridguide.R;
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.model.Shops;
+import com.charlesmoncada.madridguide.views.OnElementClick;
 import com.charlesmoncada.madridguide.views.ShopRowViewHolder;
 
 import java.util.LinkedList;
@@ -21,10 +22,6 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopRowViewHolder> {
     private final LayoutInflater layoutInflater;
     private final Shops shops;
 
-    // listener interface
-    public interface OnElementClick<T> {
-        public void elementClicked(T element, int position);
-    }
 
     private List<OnElementClick<Shop>> listeners;
 

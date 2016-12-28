@@ -23,7 +23,7 @@ public class ShopTests extends AndroidTestCase {
         assertEquals(SHOP, sut.getName());
     }
 
-    public void testANewSHopStoresDataInPropertiesCorrectly() {
+    public void testANewShopStoresDataInPropertiesCorrectly() {
         Shop sut = new Shop(11, SHOP)
                 .setAddress(ADDRESS)
                 .setDescription(DESC)

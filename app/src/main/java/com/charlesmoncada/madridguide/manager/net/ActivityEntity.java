@@ -3,7 +3,7 @@ package com.charlesmoncada.madridguide.manager.net;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ShopEntity {
+public class ActivityEntity {
 
     @SerializedName("id") private Long id;
     @SerializedName("name") private String name;

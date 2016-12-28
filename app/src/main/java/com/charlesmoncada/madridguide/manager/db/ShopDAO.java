@@ -119,7 +119,7 @@ public class ShopDAO implements DAOPersistable<Shop> {
     @Nullable
     @Override
     public Cursor queryCursor() {
-        Cursor c = db.query(TABLE_SHOP, ALL_COLUMNS, null, null, null, null, KEY_SHOP_ID);
+        Cursor c = db.query(TABLE_SHOP, TABLE_SHOP_ALL_COLUMNS, null, null, null, null, KEY_SHOP_ID);
         if (c != null && c.getCount() > 0) {
             c.moveToFirst();
         }
@@ -128,7 +128,7 @@ public class ShopDAO implements DAOPersistable<Shop> {
 
     @Override
     public @Nullable Shop query(final long id) {
-        Cursor c = db.query(TABLE_SHOP, ALL_COLUMNS, KEY_SHOP_ID + " = " + id, null, null, null, KEY_SHOP_ID);
+        Cursor c = db.query(TABLE_SHOP, TABLE_SHOP_ALL_COLUMNS, KEY_SHOP_ID + " = " + id, null, null, null, KEY_SHOP_ID);
         if (c != null && c.getCount() == 1) {
             c.moveToFirst();
         } else {
@@ -177,7 +177,7 @@ public class ShopDAO implements DAOPersistable<Shop> {
     }
 
     public Cursor queryCursor(long id) {
-        Cursor c = db.query(TABLE_SHOP, ALL_COLUMNS, "ID = " + id, null, null, null, KEY_SHOP_ID);
+        Cursor c = db.query(TABLE_SHOP, TABLE_SHOP_ALL_COLUMNS, "ID = " + id, null, null, null, KEY_SHOP_ID);
         if (c != null && c.getCount() > 0) {
             c.moveToFirst();
         }

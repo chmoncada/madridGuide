@@ -2,16 +2,17 @@ package com.charlesmoncada.madridguide;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
-import com.charlesmoncada.madridguide.manager.db.ShopDAO;
-import com.charlesmoncada.madridguide.manager.net.NetworkManager;
-import com.charlesmoncada.madridguide.manager.net.ShopEntity;
-import com.charlesmoncada.madridguide.model.Shop;
-import com.charlesmoncada.madridguide.model.mappers.ShopEntityShopMapper;
+import com.charlesmoncada.madridguide.interactors.CacheAllActivitiesInteractor;
+import com.charlesmoncada.madridguide.interactors.CacheAllShopsInteractor;
+import com.charlesmoncada.madridguide.interactors.GetAllActivitiesInteractor;
+import com.charlesmoncada.madridguide.interactors.GetAllShopsInteractor;
+import com.charlesmoncada.madridguide.model.MadridActivities;
+import com.charlesmoncada.madridguide.model.Shops;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 
 public class MadridGuideApp extends Application {
@@ -23,44 +24,43 @@ public class MadridGuideApp extends Application {
         super.onCreate();
 
         // init your app
-
         appContext = new WeakReference<Context>(getApplicationContext());
 
-        // insert test data in DB
-        //insertTestDataInDB();
-
         Picasso.with(getApplicationContext()).setLoggingEnabled(true);
-        Picasso.with(getApplicationContext()).setIndicatorsEnabled(true);
+        Picasso.with(getApplicationContext()).setIndicatorsEnabled(false);
 
-        // testing
-        NetworkManager networkManager = new NetworkManager(getApplicationContext());
-        networkManager.getShopsFromServer(new NetworkManager.GetShopsListener() {
-            @Override
-            public void getShopEntitiesSuccess(List<ShopEntity> result) {
-                List<Shop> shops = new ShopEntityShopMapper().map(result);
-                ShopDAO dao = new ShopDAO(getApplicationContext());
-
-                for (Shop shop: shops) {
-                    dao.insert(shop);
+        new GetAllShopsInteractor().execute(getApplicationContext(),
+                new GetAllShopsInteractor.GetAllShopsInteractorResponse() {
+                    @Override
+                    public void response(Shops shops) {
+                        new CacheAllShopsInteractor().execute(getApplicationContext(),
+                                shops, new CacheAllShopsInteractor.CacheAllShopsInteractorResponse() {
+                                    @Override
+                                    public void response(boolean sucess) {
+                                        Log.v("GUIDE", "GUARDE EN DISCO LOS SHOPS");
+                                    }
+                                });
+                    }
                 }
-            }
+        );
 
-            @Override
-            public void getShopEntitiesDidFail() {
+        new GetAllActivitiesInteractor().execute(getApplicationContext(),
+                new GetAllActivitiesInteractor.GetAllActivitiesInteractorResponse() {
+                    @Override
+                    public void response(MadridActivities activities) {
 
-            }
-        });
+                        new CacheAllActivitiesInteractor().execute(getApplicationContext(),
+                                activities, new CacheAllActivitiesInteractor.CacheAllActivitiesInteractorResponse() {
+                                    @Override
+                                    public void response(boolean sucess) {
+                                        Log.v("GUIDE", "GUARDE EN DISCO LAS ACTIVITIES");
+                                    }
+                                });
+                    }
 
+                });
 
     }
-
-//    private void insertTestDataInDB() {
-//        ShopDAO dao = new ShopDAO(getApplicationContext());
-//        for (int i = 0; i < 20; i++) {
-//            Shop shop = new Shop(1, "Shop " + i).setLogoImgUrl("http://platea.pntic.mec.es/~mmotta/web11ab/elfary.jpg");
-//            dao.insert(shop);
-//        }
-//    }
 
     @Override
     public void onLowMemory() {
