@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     android:id="@+id/activity_shops"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map= "http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,12 +10,22 @@
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
+    android:orientation="vertical"
     tools:context="com.charlesmoncada.madridguide.activities.ShopsActivity">
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        map:uiZoomControls="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="50"/>
 
     <fragment
         android:id="@+id/activity_shops_fragment_shops"
         android:name="com.charlesmoncada.madridguide.fragments.ShopsFragment"
+        android:layout_weight="50"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</RelativeLayout>
+</LinearLayout>

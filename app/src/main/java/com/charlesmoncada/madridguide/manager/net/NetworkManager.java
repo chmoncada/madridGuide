@@ -2,7 +2,6 @@ package com.charlesmoncada.madridguide.manager.net;
 
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -45,7 +44,7 @@ public class NetworkManager {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("JSON", response);
+                        //Log.d("JSON", response);
                         List<ShopEntity> shopResponse = parseResponse(response);
                         if (listener != null) {
                             listener.getShopEntitiesSuccess(shopResponse);
@@ -88,7 +87,7 @@ public class NetworkManager {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("JSON", response);
+                        //Log.d("JSON", response);
                         List<ActivityEntity> activityResponse = parseActivityResponse(response);
                         if (listener != null) {
                             listener.getActivityEntitiesSuccess(activityResponse);
