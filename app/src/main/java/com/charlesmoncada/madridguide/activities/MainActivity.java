@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
                                 shops, new CacheAllShopsInteractor.CacheAllShopsInteractorResponse() {
                                     @Override
                                     public void response(boolean sucess) {
-                                        Log.v("GUIDE", "GUARDE EN DISCO LOS SHOPS");
+                                        //Log.v("GUIDE", "GUARDE EN DISCO LOS SHOPS");
                                     }
                                 });
                     }
@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                                 activities, new CacheAllActivitiesInteractor.CacheAllActivitiesInteractorResponse() {
                                     @Override
                                     public void response(boolean sucess) {
-                                        Log.v("GUIDE", "GUARDE EN DISCO LAS ACTIVITIES");
+                                        //Log.v("GUIDE", "GUARDE EN DISCO LAS ACTIVITIES");
                                     }
                                 });
                     }

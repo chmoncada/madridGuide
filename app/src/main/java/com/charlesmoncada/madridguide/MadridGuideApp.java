@@ -3,6 +3,7 @@ package com.charlesmoncada.madridguide;
 import android.app.Application;
 import android.content.Context;
 
+import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 import java.lang.ref.WeakReference;
@@ -19,8 +20,13 @@ public class MadridGuideApp extends Application {
         // init your app
         appContext = new WeakReference<Context>(getApplicationContext());
 
-        Picasso.with(getApplicationContext()).setLoggingEnabled(true);
-        Picasso.with(getApplicationContext()).setIndicatorsEnabled(true);
+        Picasso.Builder builder = new Picasso.Builder(this);
+        builder.downloader(new OkHttpDownloader(this,Integer.MAX_VALUE));
+        Picasso built = builder.build();
+        built.setIndicatorsEnabled(true);
+        built.setLoggingEnabled(false);
+        Picasso.setSingletonInstance(built);
+
 
     }
 

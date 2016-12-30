@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,8 +55,6 @@ public class ShopsFragment extends Fragment {
 
             @Override
             public void elementClicked(Shop shop, int position) {
-                // TODO: show shop detail
-                Log.v("FRAGMENT", "ME DEBERIA IR A LA OTRA VISTA DE DETALLE");
                 if (listener != null) {
                     listener.elementClicked(shop, position);
                 }

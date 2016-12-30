@@ -21,8 +21,20 @@ public class ShopDetailActivity extends AppCompatActivity {
     @BindView(R.id.activity_shop_detail_shop_logo_image)
     ImageView shopLogoImage;
 
+    @BindView(R.id.activity_shop_detail_shop_image)
+    ImageView shopImage;
+
     @BindView(R.id.activity_shop_detail_shop_name_text)
     TextView shopNameText;
+
+    @BindView(R.id.activity_shop_detail_shop_description)
+    TextView shopDescriptionText;
+
+    @BindView(R.id.activity_shop_detail_shop_address)
+    TextView shopAddressText;
+
+    @BindView(R.id.activity_shop_detail_shop_map)
+    ImageView shopMapImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +59,30 @@ public class ShopDetailActivity extends AppCompatActivity {
     private void updateUI() {
 
         shopNameText.setText(shop.getName());
+        shopAddressText.setText(shop.getAddress());
+
+        //TODO: show using language
+        shopDescriptionText.setText(shop.getDescription());
+
+        showImagesOfDetailView();
+
+    }
+
+    private void showImagesOfDetailView() {
+
         Picasso.with(this)
                 .load(shop.getLogoImgUrl())
                 .into(shopLogoImage);
+        Picasso.with(this)
+                .load(shop.getImageUrl())
+                .into(shopImage);
 
+        // Map image
+        float shopLatitude = shop.getLatitude();
+        float shopLongitude = shop.getLongitude();
+        String mapURL = "http://maps.googleapis.com/maps/api/staticmap?center="+shopLatitude+","+shopLongitude+"&zoom=17&size=320x220&scale=2&markers=%7Ccolor:0x9C7B14%7C"+shopLatitude+","+shopLongitude;
+        Picasso.with(this)
+                .load(mapURL)
+                .into(shopMapImage);
     }
 }
