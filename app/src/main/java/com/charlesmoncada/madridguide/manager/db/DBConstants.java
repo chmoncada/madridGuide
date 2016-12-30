@@ -13,7 +13,8 @@ public class DBConstants {
     public static final String KEY_SHOP_LOGO_IMAGE_URL = "LOGO_IMAGE_URL";
     public static final String KEY_SHOP_ADDRESS = "ADDRESS";
     public static final String KEY_SHOP_URL = "URL";
-    public static final String KEY_SHOP_DESCRIPTION = "DESCRIPTION";
+    public static final String KEY_SHOP_DESCRIPTION_ES = "DESCRIPTION_ES";
+    public static final String KEY_SHOP_DESCRIPTION_EN = "DESCRIPTION_EN";
     public static final String KEY_SHOP_LATITUDE = "latitude";
     public static final String KEY_SHOP_LONGITUDE = "longitude";
 
@@ -24,7 +25,8 @@ public class DBConstants {
     public static final String KEY_ACTIVITY_LOGO_IMAGE_URL = "LOGO_IMAGE_URL";
     public static final String KEY_ACTIVITY_ADDRESS = "ADDRESS";
     public static final String KEY_ACTIVITY_URL = "URL";
-    public static final String KEY_ACTIVITY_DESCRIPTION = "DESCRIPTION";
+    public static final String KEY_ACTIVITY_DESCRIPTION_ES = "DESCRIPTION_ES";
+    public static final String KEY_ACTIVITY_DESCRIPTION_EN = "DESCRIPTION_EN";
     public static final String KEY_ACTIVITY_LATITUDE = "latitude";
     public static final String KEY_ACTIVITY_LONGITUDE = "longitude";
 
@@ -35,7 +37,8 @@ public class DBConstants {
             KEY_SHOP_LOGO_IMAGE_URL,
             KEY_SHOP_ADDRESS,
             KEY_SHOP_URL,
-            KEY_SHOP_DESCRIPTION,
+            KEY_SHOP_DESCRIPTION_ES,
+            KEY_SHOP_DESCRIPTION_EN,
             KEY_SHOP_LATITUDE,
             KEY_SHOP_LONGITUDE
     };
@@ -47,7 +50,8 @@ public class DBConstants {
             KEY_ACTIVITY_LOGO_IMAGE_URL,
             KEY_ACTIVITY_ADDRESS,
             KEY_ACTIVITY_URL,
-            KEY_ACTIVITY_DESCRIPTION,
+            KEY_ACTIVITY_DESCRIPTION_ES,
+            KEY_ACTIVITY_DESCRIPTION_EN,
             KEY_ACTIVITY_LATITUDE,
             KEY_ACTIVITY_LONGITUDE
     };
@@ -63,7 +67,8 @@ public class DBConstants {
                     + KEY_SHOP_URL + " text,"
                     + KEY_SHOP_LATITUDE + " real,"
                     + KEY_SHOP_LONGITUDE + " real, "
-                    + KEY_SHOP_DESCRIPTION + " text "
+                    + KEY_SHOP_DESCRIPTION_ES + " text, "
+                    + KEY_SHOP_DESCRIPTION_EN + " text "
                     + ");";
 
     public static final String SQL_SCRIPT_CREATE_ACTIVITY_TABLE =
@@ -77,7 +82,8 @@ public class DBConstants {
                     + KEY_ACTIVITY_URL + " text,"
                     + KEY_ACTIVITY_LATITUDE + " real,"
                     + KEY_ACTIVITY_LONGITUDE + " real, "
-                    + KEY_ACTIVITY_DESCRIPTION + " text "
+                    + KEY_ACTIVITY_DESCRIPTION_ES + " text, "
+                    + KEY_ACTIVITY_DESCRIPTION_EN + " text "
                     + ");";
 
     public static final String DROP_DATABASE_SCRIPTS = "";

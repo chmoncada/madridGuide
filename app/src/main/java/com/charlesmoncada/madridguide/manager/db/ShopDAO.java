@@ -67,7 +67,8 @@ public class ShopDAO implements DAOPersistable<Shop> {
         }
 
         contentValues.put(KEY_SHOP_ADDRESS, shop.getAddress());
-        contentValues.put(KEY_SHOP_DESCRIPTION, shop.getDescription());
+        contentValues.put(KEY_SHOP_DESCRIPTION_EN, shop.getDescriptionEn());
+        contentValues.put(KEY_SHOP_DESCRIPTION_ES, shop.getDescriptionEs());
         contentValues.put(KEY_SHOP_IMAGE_URL, shop.getImageUrl());
         contentValues.put(KEY_SHOP_LOGO_IMAGE_URL, shop.getLogoImgUrl());
         contentValues.put(KEY_SHOP_NAME, shop.getName());
@@ -84,7 +85,8 @@ public class ShopDAO implements DAOPersistable<Shop> {
 
         //shop.setId(contentValues.getAsInteger(KEY_SHOP_ID));
         shop.setAddress(contentValues.getAsString(KEY_SHOP_ADDRESS));
-        shop.setDescription(contentValues.getAsString(KEY_SHOP_DESCRIPTION));
+        shop.setDescriptionEn(contentValues.getAsString(KEY_SHOP_DESCRIPTION_EN));
+        shop.setDescriptionEs(contentValues.getAsString(KEY_SHOP_DESCRIPTION_ES));
         shop.setImageUrl(contentValues.getAsString(KEY_SHOP_IMAGE_URL));
         shop.setLogoImgUrl(contentValues.getAsString(KEY_SHOP_LOGO_IMAGE_URL));
         shop.setName(contentValues.getAsString(KEY_SHOP_NAME));
@@ -147,7 +149,8 @@ public class ShopDAO implements DAOPersistable<Shop> {
         Shop shop = new Shop(identifier, name);
 
         shop.setAddress(c.getString(c.getColumnIndex(KEY_SHOP_ADDRESS)));
-        shop.setDescription(c.getString(c.getColumnIndex(KEY_SHOP_DESCRIPTION)));
+        shop.setDescriptionEn(c.getString(c.getColumnIndex(KEY_SHOP_DESCRIPTION_EN)));
+        shop.setDescriptionEs(c.getString(c.getColumnIndex(KEY_SHOP_DESCRIPTION_ES)));
         shop.setImageUrl(c.getString(c.getColumnIndex(KEY_SHOP_IMAGE_URL)));
         shop.setLogoImgUrl(c.getString(c.getColumnIndex(KEY_SHOP_LOGO_IMAGE_URL)));
         shop.setLatitude(c.getFloat(c.getColumnIndex(KEY_SHOP_LATITUDE)));

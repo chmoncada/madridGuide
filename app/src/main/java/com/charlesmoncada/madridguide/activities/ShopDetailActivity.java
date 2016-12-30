@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.charlesmoncada.madridguide.MadridGuideApp;
 import com.charlesmoncada.madridguide.R;
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.util.Constants;
@@ -62,7 +63,11 @@ public class ShopDetailActivity extends AppCompatActivity {
         shopAddressText.setText(shop.getAddress());
 
         //TODO: show using language
-        shopDescriptionText.setText(shop.getDescription());
+        if (MadridGuideApp.defSystemLanguage.equals("es")) {
+            shopDescriptionText.setText(shop.getDescriptionEs());
+        } else {
+            shopDescriptionText.setText(shop.getDescriptionEn());
+        }
 
         showImagesOfDetailView();
 

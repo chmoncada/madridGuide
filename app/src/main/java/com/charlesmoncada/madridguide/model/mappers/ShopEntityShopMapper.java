@@ -14,8 +14,8 @@ public class ShopEntityShopMapper {
         for (ShopEntity entity: shopEntities) {
             Shop shop = new Shop(entity.getId(), entity.getName());
             // detect current lang
-            shop.setDescription(entity.getDescriptionEs());
-
+            shop.setDescriptionEs(entity.getDescriptionEs());
+            shop.setDescriptionEn(entity.getDescriptionEn());
             shop.setLogoImgUrl(entity.getLogoImg());
             shop.setImageUrl(entity.getImg());
             shop.setAddress(entity.getAddress());
