@@ -64,13 +64,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void response(Shops shops) {
 
-                        new CacheAllShopsInteractor().execute(getApplicationContext(),
-                                shops, new CacheAllShopsInteractor.CacheAllShopsInteractorResponse() {
-                                    @Override
-                                    public void response(boolean sucess) {
-                                        //Log.v("GUIDE", "GUARDE EN DISCO LOS SHOPS");
+                        if (shops != null) {
+                            new CacheAllShopsInteractor().execute(getApplicationContext(),
+                                    shops, new CacheAllShopsInteractor.CacheAllShopsInteractorResponse() {
+                                        @Override
+                                        public void response(boolean sucess) {
+                                            Log.v("GUIDE", "GUARDE EN DISCO LOS SHOPS: "+ sucess);
+                                        }
                                     }
-                                });
+                            );
+                        } else {
+                            Log.v("GUIDE", "Ya lo habia guardado, no lo guardo de nuevo");
+                        }
                     }
                 }
         );
@@ -81,13 +86,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void response(MadridActivities activities) {
 
-                        new CacheAllActivitiesInteractor().execute(getApplicationContext(),
-                                activities, new CacheAllActivitiesInteractor.CacheAllActivitiesInteractorResponse() {
-                                    @Override
-                                    public void response(boolean sucess) {
-                                        //Log.v("GUIDE", "GUARDE EN DISCO LAS ACTIVITIES");
+                        if (activities != null) {
+                            new CacheAllActivitiesInteractor().execute(getApplicationContext(),
+                                    activities, new CacheAllActivitiesInteractor.CacheAllActivitiesInteractorResponse() {
+                                        @Override
+                                        public void response(boolean sucess) {
+                                            Log.v("GUIDE", "GUARDE EN DISCO LAS ACTIVITIES: "+ sucess);
+                                        }
                                     }
-                                });
+                            );
+                        } else {
+                            Log.v("GUIDE", "Ya lo habia guardado, no lo guardo de nuevo");
+                        }
                     }
                 }
         );

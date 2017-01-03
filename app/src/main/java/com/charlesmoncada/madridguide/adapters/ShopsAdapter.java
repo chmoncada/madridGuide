@@ -2,6 +2,7 @@ package com.charlesmoncada.madridguide.adapters;
 
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.view.ViewGroup;
 import com.charlesmoncada.madridguide.R;
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.model.Shops;
-import com.charlesmoncada.madridguide.views.OnElementClick;
+import com.charlesmoncada.madridguide.util.OnElementClick;
 import com.charlesmoncada.madridguide.views.ShopRowViewHolder;
 
 import java.util.LinkedList;
@@ -20,7 +21,6 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopRowViewHolder> {
 
     private final LayoutInflater layoutInflater;
     private final Shops shops;
-
 
     private List<OnElementClick<Shop>> listeners;
 
@@ -68,7 +68,7 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopRowViewHolder> {
         return listeners;
     }
 
-    public void  setOnElementClickListener(OnElementClick<Shop> listener) {
+    public void  setOnElementClickListener(@NonNull final OnElementClick<Shop> listener) {
         getListeners().add(listener);
     }
 

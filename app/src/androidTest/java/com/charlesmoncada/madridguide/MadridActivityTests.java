@@ -13,7 +13,8 @@ public class MadridActivityTests extends AndroidTestCase {
     public static final String LOGO_IMAGE_URL = "LOGO_IMAGE_URL";
     public static final String ADDRESS = "ADDRESS";
     public static final String URL = "URL";
-    public static final String DESCRIPTION = "DESCRIPTION";
+    public static final String DESCRIPTION_ES = "DESCRIPTION_ES";
+    public static final String DESCRIPTION_EN = "DESCRIPTION_EN";
     public static final float LATITUDE = (float) -12.02;
     public static final float LONGITUDE = (float) -77.01;
 
@@ -36,7 +37,8 @@ public class MadridActivityTests extends AndroidTestCase {
                 .setLogoImgUrl(LOGO_IMAGE_URL)
                 .setAddress(ADDRESS)
                 .setUrl(URL)
-                .setDescription(DESCRIPTION)
+                .setDescriptionEs(DESCRIPTION_ES)
+                .setDescriptionEn(DESCRIPTION_EN)
                 .setLatitude(LATITUDE)
                 .setLongitude(LONGITUDE);
 
@@ -44,7 +46,8 @@ public class MadridActivityTests extends AndroidTestCase {
         assertEquals(sut.getLogoImgUrl(), LOGO_IMAGE_URL);
         assertEquals(sut.getAddress(), ADDRESS);
         assertEquals(sut.getUrl(), URL);
-        assertEquals(sut.getDescription(), DESCRIPTION);
+        assertEquals(sut.getDescriptionEn(), DESCRIPTION_EN);
+        assertEquals(sut.getDescriptionEs(), DESCRIPTION_ES);
         assertEquals(sut.getLatitude(), LATITUDE);
         assertEquals(sut.getLongitude(), LONGITUDE);
 

@@ -15,7 +15,8 @@ public class ActivityEntityMadridActivityMapper {
         for (ActivityEntity entity: activityEntities) {
             MadridActivity activity = new MadridActivity(entity.getId(), entity.getName());
             // detect current lang
-            activity.setDescription(entity.getDescriptionEs());
+            activity.setDescriptionEs(entity.getDescriptionEs());
+            activity.setDescriptionEn(entity.getDescriptionEn());
 
             activity.setLogoImgUrl(entity.getLogoImg());
             activity.setImageUrl(entity.getImg());

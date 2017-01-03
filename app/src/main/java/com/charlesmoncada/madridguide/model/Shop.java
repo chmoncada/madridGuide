@@ -89,8 +89,9 @@ public class Shop implements Serializable{
         return descriptionEn;
     }
 
-    public void setDescriptionEn(String descriptionEn) {
+    public Shop setDescriptionEn(String descriptionEn) {
         this.descriptionEn = descriptionEn;
+        return this;
     }
 
     public float getLatitude() {

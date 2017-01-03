@@ -62,7 +62,6 @@ public class ShopDetailActivity extends AppCompatActivity {
         shopNameText.setText(shop.getName());
         shopAddressText.setText(shop.getAddress());
 
-        //TODO: show using language
         if (MadridGuideApp.defSystemLanguage.equals("es")) {
             shopDescriptionText.setText(shop.getDescriptionEs());
         } else {

@@ -61,7 +61,8 @@ public class ActivityDAO implements DAOPersistable<MadridActivity> {
         }
 
         contentValues.put(KEY_ACTIVITY_ADDRESS, activity.getAddress());
-        contentValues.put(KEY_ACTIVITY_DESCRIPTION_ES, activity.getDescription());
+        contentValues.put(KEY_ACTIVITY_DESCRIPTION_ES, activity.getDescriptionEs());
+        contentValues.put(KEY_ACTIVITY_DESCRIPTION_EN, activity.getDescriptionEn());
         contentValues.put(KEY_ACTIVITY_IMAGE_URL, activity.getImageUrl());
         contentValues.put(KEY_ACTIVITY_LOGO_IMAGE_URL, activity.getLogoImgUrl());
         contentValues.put(KEY_ACTIVITY_NAME, activity.getName());
@@ -76,7 +77,8 @@ public class ActivityDAO implements DAOPersistable<MadridActivity> {
         final MadridActivity activity = new MadridActivity(1, "");
 
         activity.setAddress(contentValues.getAsString(KEY_ACTIVITY_ADDRESS));
-        activity.setDescription(contentValues.getAsString(KEY_ACTIVITY_DESCRIPTION_ES));
+        activity.setDescriptionEs(contentValues.getAsString(KEY_ACTIVITY_DESCRIPTION_ES));
+        activity.setDescriptionEn(contentValues.getAsString(KEY_ACTIVITY_DESCRIPTION_EN));
         activity.setImageUrl(contentValues.getAsString(KEY_ACTIVITY_IMAGE_URL));
         activity.setLogoImgUrl(contentValues.getAsString(KEY_ACTIVITY_LOGO_IMAGE_URL));
         activity.setName(contentValues.getAsString(KEY_ACTIVITY_NAME));
@@ -132,7 +134,8 @@ public class ActivityDAO implements DAOPersistable<MadridActivity> {
         MadridActivity activity = new MadridActivity(identifier, name);
 
         activity.setAddress(c.getString(c.getColumnIndex(KEY_ACTIVITY_ADDRESS)));
-        activity.setDescription(c.getString(c.getColumnIndex(KEY_ACTIVITY_DESCRIPTION_ES)));
+        activity.setDescriptionEs(c.getString(c.getColumnIndex(KEY_ACTIVITY_DESCRIPTION_ES)));
+        activity.setDescriptionEn(c.getString(c.getColumnIndex(KEY_ACTIVITY_DESCRIPTION_EN)));
         activity.setImageUrl(c.getString(c.getColumnIndex(KEY_ACTIVITY_IMAGE_URL)));
         activity.setLogoImgUrl(c.getString(c.getColumnIndex(KEY_ACTIVITY_LOGO_IMAGE_URL)));
         activity.setLatitude(c.getFloat(c.getColumnIndex(KEY_ACTIVITY_LATITUDE)));

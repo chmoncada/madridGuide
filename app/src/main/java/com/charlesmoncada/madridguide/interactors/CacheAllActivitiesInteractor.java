@@ -2,11 +2,11 @@ package com.charlesmoncada.madridguide.interactors;
 
 
 import android.content.Context;
-import android.os.Looper;
 
 import com.charlesmoncada.madridguide.manager.db.ActivityDAO;
 import com.charlesmoncada.madridguide.model.MadridActivities;
 import com.charlesmoncada.madridguide.model.MadridActivity;
+import com.charlesmoncada.madridguide.util.MainThread;
 
 public class CacheAllActivitiesInteractor {
 
@@ -28,13 +28,16 @@ public class CacheAllActivitiesInteractor {
                     }
                 }
 
-                Looper main = Looper.getMainLooper();
+                final boolean successResponse = success;
 
-                // TODO: TIENE QUE IR AL HILO PRINCIPAL!!!!
-                //main.getThread()
-                if (response != null) {
-                    response.response(success);
-                }
+                MainThread.run(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (response != null) {
+                            response.response(successResponse);
+                        }
+                    }
+                });
             }
         }).start();
 

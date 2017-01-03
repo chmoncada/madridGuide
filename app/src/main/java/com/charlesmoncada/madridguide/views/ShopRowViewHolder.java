@@ -42,14 +42,10 @@ public class ShopRowViewHolder extends RecyclerView.ViewHolder {
 
         Picasso.with(context.get())
                 .load(shop.getLogoImgUrl())
-                //.placeholder(android.R.drawable.ic_dialog_email)
-                //.memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.OFFLINE)
                 .into(logoImageView, new Callback() {
                     @Override
-                    public void onSuccess() {
-
-                    }
+                    public void onSuccess() {}
 
                     @Override
                     public void onError() {
@@ -58,28 +54,20 @@ public class ShopRowViewHolder extends RecyclerView.ViewHolder {
                                 .load(shop.getLogoImgUrl())
                                 .into(logoImageView, new Callback() {
                                     @Override
-                                    public void onSuccess() {
-
-                                    }
+                                    public void onSuccess() {}
 
                                     @Override
-                                    public void onError() {
-                                        Log.v("Picasso","Could not fetch image");
-                                    }
+                                    public void onError() { Log.v("Picasso","Could not fetch image"); }
                                 });
-
                     }
                 });
+
         Picasso.with(context.get())
                 .load(shop.getImageUrl())
-                //.placeholder(android.R.drawable.ic_dialog_email)
-                //.memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.OFFLINE)
                 .into(shopImageView, new Callback() {
                     @Override
-                    public void onSuccess() {
-
-                    }
+                    public void onSuccess() { }
 
                     @Override
                     public void onError() {
@@ -88,24 +76,14 @@ public class ShopRowViewHolder extends RecyclerView.ViewHolder {
                                 .load(shop.getImageUrl())
                                 .into(shopImageView, new Callback() {
                                     @Override
-                                    public void onSuccess() {
-
-                                    }
+                                    public void onSuccess() { }
 
                                     @Override
-                                    public void onError() {
-                                        Log.v("Picasso","Could not fetch image");
-                                    }
+                                    public void onError() { Log.v("Picasso","Could not fetch image"); }
                                 });
-
                     }
                 });
-//        Picasso.with(context.get())
-//                .load(shop.getImageUrl())
-//                .placeholder(android.R.drawable.screen_background_dark)
-//                //.memoryPolicy(MemoryPolicy.NO_CACHE)
-//                //.networkPolicy(NetworkPolicy.NO_CACHE)
-//                .into(shopImageView);
+
     }
 
 }

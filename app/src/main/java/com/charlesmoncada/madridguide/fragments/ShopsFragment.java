@@ -2,6 +2,7 @@ package com.charlesmoncada.madridguide.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,13 +15,12 @@ import com.charlesmoncada.madridguide.R;
 import com.charlesmoncada.madridguide.adapters.ShopsAdapter;
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.model.Shops;
-import com.charlesmoncada.madridguide.views.OnElementClick;
+import com.charlesmoncada.madridguide.util.OnElementClick;
 
 
 public class ShopsFragment extends Fragment {
     private RecyclerView shopsRecyclerView;
     private ShopsAdapter adapter;
-    // ANADIDO CLASE 4.1
     private Shops shops;
 
     private OnElementClick<Shop> listener;
@@ -39,7 +39,6 @@ public class ShopsFragment extends Fragment {
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getSupportActionBar().setTitle(R.string.shops_activity_title);
         //activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         //updateUI();
 
@@ -78,7 +77,7 @@ public class ShopsFragment extends Fragment {
         return listener;
     }
 
-    public  void setOnElementClickListener(OnElementClick<Shop> listener) {
+    public  void setOnElementClickListener(@NonNull final OnElementClick<Shop> listener) {
         this.listener = listener;
     }
 

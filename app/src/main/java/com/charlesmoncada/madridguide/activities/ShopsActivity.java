@@ -21,13 +21,15 @@ import com.charlesmoncada.madridguide.manager.db.provider.MadridGuideProvider;
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.model.Shops;
 import com.charlesmoncada.madridguide.navigator.Navigator;
-import com.charlesmoncada.madridguide.views.OnElementClick;
+import com.charlesmoncada.madridguide.views.MapInfoWindowAdapter;
+import com.charlesmoncada.madridguide.util.OnElementClick;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class ShopsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, OnMapReadyCallback {
@@ -45,8 +47,6 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
         setContentView(R.layout.activity_shops);
 
         shopsFragment = (ShopsFragment) getSupportFragmentManager().findFragmentById(R.id.activity_shops_fragment_shops);
-
-
 
         LoaderManager loaderManager = getSupportLoaderManager();
         loaderManager.initLoader(0, null, this);
@@ -88,7 +88,7 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 
-        // Get the model
+        // Get the model, should be a interactor
         shops = ShopDAO.getShops(data);
 
         // setup the map
@@ -128,11 +128,23 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
         googleMap = map;
 
         showUserPosition();
-        moveCamera();
+        moveCameraToMadridCenter();
         showShopMarkers();
+
+        googleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(getLayoutInflater()));
+
+        googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Shop shop = (Shop) marker.getTag();
+                marker.hideInfoWindow();
+                Navigator.navigateFromShopsActivityToShopDetailActivity(ShopsActivity.this, shop);
+            }
+        });
+
     }
 
-    private void moveCamera() {
+    private void moveCameraToMadridCenter() {
         CameraPosition cameraPosition = new CameraPosition.Builder().target(
                 new LatLng(40.417005,-3.703423)).zoom(12).build();
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
@@ -144,7 +156,8 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
             float longitude = shop.getLongitude();
             LatLng position = new LatLng(latitude, longitude);
             String name = shop.getName();
-            googleMap.addMarker(new MarkerOptions().position(position).title(name));
+            Marker marker = googleMap.addMarker(new MarkerOptions().position(position).title(name));
+            marker.setTag(shop);
         }
     }
 

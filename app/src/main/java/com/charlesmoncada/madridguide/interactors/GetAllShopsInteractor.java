@@ -2,7 +2,9 @@ package com.charlesmoncada.madridguide.interactors;
 
 
 import android.content.Context;
+import android.util.Log;
 
+import com.charlesmoncada.madridguide.manager.db.ShopDAO;
 import com.charlesmoncada.madridguide.manager.net.NetworkManager;
 import com.charlesmoncada.madridguide.manager.net.ShopEntity;
 import com.charlesmoncada.madridguide.model.Shop;
@@ -18,24 +20,38 @@ public class GetAllShopsInteractor {
     }
 
     public void execute(final Context context, final GetAllShopsInteractorResponse response) {
-        NetworkManager networkManager = new NetworkManager(context);
-        networkManager.getShopsFromServer(new NetworkManager.GetShopsListener() {
-            @Override
-            public void getShopEntitiesSuccess(List<ShopEntity> result) {
 
-                List<Shop> shops = new ShopEntityShopMapper().map(result);
-                if (response != null) {
-                    response.response(Shops.build(shops));
-                }
+        ShopDAO dao = new ShopDAO(context);
+
+        if (dao.query() != null ) {
+            Log.v("SHOPSDAO", "YA TENEMOS DATOS, NO DEBERIAMOS BAJARLOS DE NUEVO");
+            if (response != null) {
+                response.response(null);
             }
 
-            @Override
-            public void getShopEntitiesDidFail() {
-                if (response != null) {
-                    response.response(null);
+        } else {
+            Log.v("SHOPSACTIVITY", "NO TENEMOS DATOS, BAJANDO...");
+            NetworkManager networkManager = new NetworkManager(context);
+            networkManager.getShopsFromServer(new NetworkManager.GetShopsListener() {
+                @Override
+                public void getShopEntitiesSuccess(List<ShopEntity> result) {
+
+                    List<Shop> shops = new ShopEntityShopMapper().map(result);
+                    if (response != null) {
+                        response.response(Shops.build(shops));
+                    }
                 }
-            }
-        });
+
+                @Override
+                public void getShopEntitiesDidFail() {
+                    if (response != null) {
+                        response.response(null);
+                    }
+                }
+            });
+        }
+
+
     }
 }
 

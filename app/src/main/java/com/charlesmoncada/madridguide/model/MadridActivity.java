@@ -11,7 +11,8 @@ public class MadridActivity implements Serializable{
     private String logoImgUrl;
     private String address;
     private String url;
-    private String description;
+    private String descriptionEs;
+    private String descriptionEn;
     private float latitude;
     private float longitude;
 
@@ -59,12 +60,21 @@ public class MadridActivity implements Serializable{
         return this;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionEs() {
+        return descriptionEs;
     }
 
-    public MadridActivity setDescription(String description) {
-        this.description = description;
+    public MadridActivity setDescriptionEs(String descriptionEs) {
+        this.descriptionEs = descriptionEs;
+        return this;
+    }
+
+    public String getDescriptionEn() {
+        return descriptionEn;
+    }
+
+    public MadridActivity setDescriptionEn(String descriptionEn) {
+        this.descriptionEn = descriptionEn;
         return this;
     }
 

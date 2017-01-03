@@ -1,4 +1,4 @@
-package com.charlesmoncada.madridguide.views;
+package com.charlesmoncada.madridguide.util;
 
 
 public interface OnElementClick<T> {
