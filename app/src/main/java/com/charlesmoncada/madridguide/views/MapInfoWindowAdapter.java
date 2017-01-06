@@ -11,6 +11,7 @@ import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.util.MarkerCallback;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter{
@@ -35,12 +36,13 @@ public class MapInfoWindowAdapter implements GoogleMap.InfoWindowAdapter{
         final ImageView logo = (ImageView) infoView.findViewById(R.id.map_info_window_logo);
 
         final Shop shop = (Shop) marker.getTag();
-        final String logoURL = shop.getLogoImgUrl();
+        //final String logoURL = shop.getLogoImgUrl();
 
         name.setText(shop.getName());
 
         Picasso.with(mapInflater.getContext())
-                .load(logoURL)
+                .load(shop.getLogoImgUrl())
+                .networkPolicy(NetworkPolicy.OFFLINE)
                 .into(logo, new MarkerCallback(marker));
 
         return infoView;

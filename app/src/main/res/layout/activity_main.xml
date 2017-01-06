@@ -12,20 +12,28 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.charlesmoncada.madridguide.activities.MainActivity">
 
-    <Button
-        android:id="@+id/activity_main_shops_button"
-        android:layout_width="@dimen/activity_main_shops_button_width"
-        android:layout_height="@dimen/activity_main_shops_button_width"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/activity_main_shops_button_text"
-    />
-    <Button
-        android:id="@+id/activity_main_activities_button"
-        android:layout_width="@dimen/activity_main_shops_button_width"
-        android:layout_height="@dimen/activity_main_shops_button_width"
-        android:layout_below="@+id/activity_main_shops_button"
-        android:layout_centerHorizontal="true"
-        android:text="@string/activity_main_activities_button_text"
-    />
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/activity_main_shops_button"
+            android:layout_width="@dimen/activity_main_shops_button_width"
+            android:layout_height="@dimen/activity_main_shops_button_width"
+            android:text="@string/activity_main_shops_button_text"
+        />
+        <Button
+            android:id="@+id/activity_main_activities_button"
+            android:layout_width="@dimen/activity_main_shops_button_width"
+            android:layout_height="@dimen/activity_main_shops_button_width"
+            android:text="@string/activity_main_activities_button_text"
+        />
+
+    </LinearLayout>
+    
+
 
 </RelativeLayout>

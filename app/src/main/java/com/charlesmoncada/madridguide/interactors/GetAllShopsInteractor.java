@@ -45,6 +45,7 @@ public class GetAllShopsInteractor {
                 @Override
                 public void getShopEntitiesDidFail() {
                     if (response != null) {
+                        Log.v("SHOPSACTIVITY", "ERROR BAJANDO LOS SHOPS");
                         response.response(null);
                     }
                 }

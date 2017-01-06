@@ -27,7 +27,6 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopRowViewHolder> {
     public ShopsAdapter(Shops shops, Context context) {
         this.shops = shops;
         this.layoutInflater = LayoutInflater.from(context);
-
     }
 
     @Override

@@ -16,6 +16,7 @@ public class MarkerCallback implements Callback {
 
     @Override
     public void onSuccess() {
+        Log.v("PICASSO", "cargo de disco");
         if (marker != null && marker.isInfoWindowShown()) {
             marker.hideInfoWindow();
             marker.showInfoWindow();

@@ -86,7 +86,7 @@ public class ShopDetailActivity extends AppCompatActivity {
         float shopLongitude = shop.getLongitude();
         String mapURL = "http://maps.googleapis.com/maps/api/staticmap?center="+shopLatitude+","+shopLongitude+"&zoom=17&size=320x220&scale=2&markers=%7Ccolor:0x9C7B14%7C"+shopLatitude+","+shopLongitude;
         Picasso.with(this)
-                .load(mapURL)
+                .load("http://maps.googleapis.com/maps/api/staticmap?center="+shop.getLatitude()+","+shop.getLongitude()+"&zoom=17&size=320x220&scale=2&markers=%7Ccolor:0x9C7B14%7C"+shop.getLatitude()+","+shop.getLongitude())
                 .into(shopMapImage);
     }
 }
