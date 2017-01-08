@@ -24,13 +24,11 @@ public class GetAllActivitiesInteractor {
         ActivityDAO dao = new ActivityDAO(context);
 
         if (dao.query() != null ) {
-            Log.v("ActivitiesDAO", "YA TENEMOS DATOS, NO DEBERIAMOS BAJARLOS DE NUEVO");
             if (response != null) {
                 response.response(null);
             }
 
         } else {
-            Log.v("SHOPSACTIVITY", "NO TENEMOS DATOS, BAJANDO...");
             NetworkManager networkManager = new NetworkManager(context);
             networkManager.getActivitiesFromServer(new NetworkManager.GetActivitiesListener() {
 
@@ -49,9 +47,7 @@ public class GetAllActivitiesInteractor {
                         response.response(null);
                     }
                 }
-
             });
         }
     }
-
 }

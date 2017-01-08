@@ -24,18 +24,15 @@ public class GetAllShopsInteractor {
         ShopDAO dao = new ShopDAO(context);
 
         if (dao.query() != null ) {
-            Log.v("SHOPSDAO", "YA TENEMOS DATOS, NO DEBERIAMOS BAJARLOS DE NUEVO");
             if (response != null) {
                 response.response(null);
             }
 
         } else {
-            Log.v("SHOPSACTIVITY", "NO TENEMOS DATOS, BAJANDO...");
             NetworkManager networkManager = new NetworkManager(context);
             networkManager.getShopsFromServer(new NetworkManager.GetShopsListener() {
                 @Override
                 public void getShopEntitiesSuccess(List<ShopEntity> result) {
-
                     List<Shop> shops = new ShopEntityShopMapper().map(result);
                     if (response != null) {
                         response.response(Shops.build(shops));
@@ -45,14 +42,11 @@ public class GetAllShopsInteractor {
                 @Override
                 public void getShopEntitiesDidFail() {
                     if (response != null) {
-                        Log.v("SHOPSACTIVITY", "ERROR BAJANDO LOS SHOPS");
                         response.response(null);
                     }
                 }
             });
         }
-
-
     }
 }
 

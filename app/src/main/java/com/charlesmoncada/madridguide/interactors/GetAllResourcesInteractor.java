@@ -3,7 +3,6 @@ package com.charlesmoncada.madridguide.interactors;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 
 import com.charlesmoncada.madridguide.model.MadridActivities;
 import com.charlesmoncada.madridguide.model.Shops;
@@ -26,34 +25,21 @@ public class GetAllResourcesInteractor {
                     new CacheAllShopsInteractor().execute(context, shops, new CacheAllShopsInteractor.CacheAllShopsInteractorResponse() {
                         @Override
                         public void response(boolean sucess) {
-                            Log.v("GUIDE", "GUARDE EN DISCO LOS SHOPS: "+ sucess);
                             ProgressDialogUtils.updateProgressDialog(dialog,15);
-                            new CacheAllImagesForShopsInteractor().execute(context, new CacheAllImagesForShopsInteractor.CacheAllImagesInteractorResponse() {
-                                @Override
-                                public void response(boolean sucess) {
-
-                                }
-
+                            new CacheAllImagesForShopsInteractor().execute(context, new CacheAllImagesForShopsInteractor.CacheAllImagesForShopsInteractorResponse() {
                                 @Override
                                 public void totalResponse(int sucessResponse, int totalImages) {
                                     if (sucessResponse == totalImages) {
                                         ProgressDialogUtils.updateProgressDialog(dialog,20);
-                                        Log.v("CACHE", "TERMINE");
                                         response.shopResponse(true);
-                                    } else {
-                                        Log.v("CACHE", "voy descargando "+ sucessResponse + " de "+ totalImages);
                                     }
                                 }
-
-
                             });
-                            //response.shopResponse(true);
                         }
                     });
                 } else {
-                    Log.v("GUIDE", "Ya lo habia guardado, no lo guardo de nuevo");
                     ProgressDialogUtils.updateProgressDialog(dialog,50);
-                    response.shopResponse(true);
+                    response.shopResponse(false);
                 }
 
             }
@@ -63,17 +49,25 @@ public class GetAllResourcesInteractor {
             @Override
             public void response(MadridActivities activities) {
                 if (activities != null) {
+                    ProgressDialogUtils.updateProgressDialog(dialog,15);
                     new CacheAllActivitiesInteractor().execute(context, activities, new CacheAllActivitiesInteractor.CacheAllActivitiesInteractorResponse() {
+                        @Override
+                        public void response(boolean sucess) {
+                            ProgressDialogUtils.updateProgressDialog(dialog,15);
+                            new CacheAllImagesForActivitiesInteractor().execute(context, new CacheAllImagesForActivitiesInteractor.CacheAllImagesForActivitiesInteractorResponse() {
                                 @Override
-                                public void response(boolean sucess) {
-                                    Log.v("GUIDE", "GUARDE EN DISCO LAS ACTIVITIES: "+ sucess);
-                                    response.activityResponse(true);
+                                public void totalResponse(int sucessResponse, int totalImages) {
+                                    if (sucessResponse == totalImages) {
+                                        ProgressDialogUtils.updateProgressDialog(dialog,20);
+                                        response.activityResponse(true);
+                                    }
                                 }
-                            }
-                    );
+                            });
+                        }
+                    });
                 } else {
-                    Log.v("GUIDE", "Ya lo habia guardado, no lo guardo de nuevo");
-                    response.activityResponse(true);
+                    ProgressDialogUtils.updateProgressDialog(dialog,50);
+                    response.activityResponse(false);
                 }
 
             }

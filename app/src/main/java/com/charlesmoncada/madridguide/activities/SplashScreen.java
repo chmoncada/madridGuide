@@ -5,19 +5,15 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.charlesmoncada.madridguide.R;
+import com.charlesmoncada.madridguide.interactors.DeleteAllDataInteractor;
 import com.charlesmoncada.madridguide.interactors.GetAllResourcesInteractor;
 import com.charlesmoncada.madridguide.navigator.Navigator;
+import com.charlesmoncada.madridguide.util.DateUtils;
 import com.charlesmoncada.madridguide.util.NetworkUtils;
-import com.charlesmoncada.madridguide.util.ProgressDialogUtils;
 
 public class SplashScreen extends AppCompatActivity {
-
-    public void setShopFinish(boolean shopFinish) {
-        this.shopFinish = shopFinish;
-    }
 
     boolean shopFinish = false;
     boolean activityFinish = false;
@@ -31,8 +27,20 @@ public class SplashScreen extends AppCompatActivity {
         if (!NetworkUtils.isInternetAvailable(getApplicationContext())) {
             showAlertDialog();
         } else {
-            setupProgressDialog();
-            getAllResources();
+
+            if (DateUtils.isCacheNotLongerValid(SplashScreen.this)) {
+
+                new DeleteAllDataInteractor().execute(getApplicationContext(), new DeleteAllDataInteractor.DeleteAllDataInteractorResponse() {
+                    @Override
+                    public void response(boolean success) {
+                        setupProgressDialog();
+                        getAllResources();
+                    }
+                });
+            } else {
+                setupProgressDialog();
+                getAllResources();
+            }
         }
     }
 
@@ -51,10 +59,9 @@ public class SplashScreen extends AppCompatActivity {
         new GetAllResourcesInteractor().execute(getApplicationContext(), dialog,new GetAllResourcesInteractor.GetAllResourcesInteractorResponse() {
             @Override
             public void shopResponse(boolean success) {
-                Log.v("SPLASH", "termine de cargar los shops");
                 shopFinish = true;
                 if (activityFinish) {
-                    Log.v("SPLASH", "termine de cargar todo");
+                    if (success) {DateUtils.saveDateInSharedPreferences(SplashScreen.this); }
                     dialog.dismiss();
                     Navigator.navigateFromSplashScreenToMainActivity(SplashScreen.this);
                 }
@@ -62,11 +69,9 @@ public class SplashScreen extends AppCompatActivity {
 
             @Override
             public void activityResponse(boolean success) {
-                Log.v("SPLASH", "termine de cargar los activities");
-                ProgressDialogUtils.updateProgressDialog(dialog,50);
                 activityFinish = true;
                 if (shopFinish) {
-                    Log.v("SPLASH", "termine de cargar todo");
+                    if (success) { DateUtils.saveDateInSharedPreferences(SplashScreen.this); }
                     dialog.dismiss();
                     Navigator.navigateFromSplashScreenToMainActivity(SplashScreen.this);
                 }
@@ -76,7 +81,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private void setupProgressDialog() {
         dialog = new ProgressDialog(this);
-        dialog.setMessage("Downloading:");
+        dialog.setMessage(getString(R.string.splash_screen_dialog_text));
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         dialog.setProgress(0);
         dialog.setMax(100);

@@ -11,4 +11,6 @@
         info. Consigue conexión e intenta de nuevo
     </string>
     <string name="OK">De Acuerdo</string>
+    <string name="splash_screen_dialog_text">Downloading information, please don\'t close the app
+    </string>
 </resources>

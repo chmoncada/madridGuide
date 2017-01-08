@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.model.Shops;
@@ -112,9 +113,12 @@ public class ShopDAO implements DAOPersistable<Shop> {
     }
 
     @Override
-    public void deleteAll() {
+    public int deleteAll() {
 
-            db.delete(TABLE_SHOP, null,null); // 2nd way
+        int result = db.delete(TABLE_SHOP, null,null);// 2nd way
+        Log.v("DELETE ALL:", String.valueOf(result));
+
+        return result;
 
     }
 

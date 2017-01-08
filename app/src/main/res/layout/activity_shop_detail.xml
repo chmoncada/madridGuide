@@ -68,8 +68,6 @@
             android:layout_height="220dp"
             android:scaleType="fitXY"/>
 
-
-
     </LinearLayout>
 
 </ScrollView>

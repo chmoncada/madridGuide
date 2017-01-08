@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.charlesmoncada.madridguide.model.MadridActivities;
 import com.charlesmoncada.madridguide.model.MadridActivity;
@@ -100,8 +101,12 @@ public class ActivityDAO implements DAOPersistable<MadridActivity> {
     }
 
     @Override
-    public void deleteAll() {
-        db.delete(TABLE_ACTIVITY, null, null);
+    public int deleteAll() {
+        int result = db.delete(TABLE_ACTIVITY, null,null);// 2nd way
+        Log.v("DELETE ALL:", String.valueOf(result));
+        //db.delete(TABLE_ACTIVITY, null, null);
+
+        return result;
     }
 
     @Nullable

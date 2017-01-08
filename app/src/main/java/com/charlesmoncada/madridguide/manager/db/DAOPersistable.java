@@ -11,7 +11,7 @@ public interface DAOPersistable<T> {
     long insert(@NonNull T data);
     void update(final long id, final @NonNull T data);
     int delete(final long id);
-    void deleteAll();
+    int deleteAll();
     @Nullable Cursor queryCursor();
     T query(final long id);
     @Nullable List<T> query();

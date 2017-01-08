@@ -45,7 +45,7 @@ public class ShopRowViewHolder extends RecyclerView.ViewHolder {
                 .networkPolicy(NetworkPolicy.OFFLINE)
                 .into(logoImageView, new Callback() {
                     @Override
-                    public void onSuccess() { Log.v("PICASSO", "cargo de disco");}
+                    public void onSuccess() { }
 
                     @Override
                     public void onError() {
