@@ -3,9 +3,10 @@ package com.charlesmoncada.madridguide.model;
 import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-public class Shops implements IShopsIterable, IShopsUpdatable {
+public class Shops implements Iterable, Updatable {
 
     List<Shop> shops;
 
@@ -41,22 +42,63 @@ public class Shops implements IShopsIterable, IShopsUpdatable {
     }
 
     @Override
-    public List<Shop> allShops() {
+    public List<Shop> all() {
         return shops;
     }
 
     @Override
-    public void add(Shop shop) {
+    public void add(Object element) {
+        Shop shop = (Shop) element;
         shops.add(shop);
     }
 
     @Override
-    public void delete(Shop shop) {
+    public void delete(Object element) {
+        Shop shop = (Shop) element;
         shops.remove(shop);
     }
 
     @Override
-    public void edit(Shop newShop, long index) {
+    public void edit(Object newElement, long index) {
+        Shop newShop = (Shop) newElement;
         shops.set((int) index, newShop);
     }
+
+    public List<Shop> query(String query) {
+
+        List<Shop> result = new LinkedList<>();
+
+        for (Shop shop: shops) {
+            if (containsIgnoreCase(shop.getName(), query)) {
+                result.add(shop);
+            }
+        }
+
+        return  result;
+
+    }
+
+    private static boolean containsIgnoreCase(String src, String what) {
+        final int length = what.length();
+        if (length == 0)
+            return true; // Empty string is contained
+
+        final char firstLo = Character.toLowerCase(what.charAt(0));
+        final char firstUp = Character.toUpperCase(what.charAt(0));
+
+        for (int i = src.length() - length; i >= 0; i--) {
+            // Quick check before calling the more expensive regionMatches() method:
+            final char ch = src.charAt(i);
+            if (ch != firstLo && ch != firstUp)
+                continue;
+
+            if (src.regionMatches(true, i, what, 0, length))
+                return true;
+        }
+
+        return false;
+    }
+
+
+
 }

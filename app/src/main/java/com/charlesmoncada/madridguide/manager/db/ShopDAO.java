@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.model.Shops;
@@ -16,7 +15,18 @@ import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.charlesmoncada.madridguide.manager.db.DBConstants.*;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_SHOP_ADDRESS;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_SHOP_DESCRIPTION_EN;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_SHOP_DESCRIPTION_ES;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_SHOP_ID;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_SHOP_IMAGE_URL;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_SHOP_LATITUDE;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_SHOP_LOGO_IMAGE_URL;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_SHOP_LONGITUDE;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_SHOP_NAME;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_SHOP_URL;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.TABLE_SHOP;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.TABLE_SHOP_ALL_COLUMNS;
 
 
 public class ShopDAO implements DAOPersistable<Shop> {
@@ -116,7 +126,6 @@ public class ShopDAO implements DAOPersistable<Shop> {
     public int deleteAll() {
 
         int result = db.delete(TABLE_SHOP, null,null);// 2nd way
-        Log.v("DELETE ALL:", String.valueOf(result));
 
         return result;
 

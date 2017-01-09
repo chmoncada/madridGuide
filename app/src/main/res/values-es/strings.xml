@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MadridGuide</string>
+    <string name="OK">De Acuerdo</string>
+    <string name="activity_main_activities_button_text">Actividades</string>
+    <string name="activity_main_shops_button_text">Comercios</string>
+    <string name="main_activity_warning_text">No hay conexión a Internet. No podemos descargar la
+        información. Por favor consigue conexión e intenta de nuevo
+    </string>
+    <string name="main_activity_warning_title">Importante</string>
+    <string name="search">Busqueda</string>
+    <string name="shops_activity_title">COMERCIOS</string>
+    <string name="shops_url">http://madrid-shops.com/json_new/getShops.php</string>
+    <string name="activities_url">"http://madrid-shops.com/json_new/getActivities.php "</string>
+    <string name="splash_screen_dialog_text">Descargando la información, por favor no cierre la app</string>
+</resources>

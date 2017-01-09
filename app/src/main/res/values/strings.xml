@@ -1,16 +1,11 @@
 <resources>
     <string name="app_name">MadridGuide</string>
     <string name="activity_main_shops_button_text">Shops</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="shops_activity_title">SHOPPING</string>
     <string name="activity_main_activities_button_text">Activities</string>
-    <string name="main_activity_warning_title">Importante</string>
-    <string name="main_activity_warning_text">No hay conexión a Internet. No se podra descargar la
-        info. Consigue conexión e intenta de nuevo
-    </string>
-    <string name="OK">De Acuerdo</string>
-    <string name="splash_screen_dialog_text">Downloading information, please don\'t close the app
-    </string>
+    <string name="main_activity_warning_title">Important!</string>
+    <string name="main_activity_warning_text">There is no Internet connection.  We are not able to download the info. Please get Internet connection and try again.</string>
+    <string name="OK">OK</string>
+    <string name="splash_screen_dialog_text">Downloading information, please don\'t close the app</string>
+    <string name="search">Search</string>
 </resources>

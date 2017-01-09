@@ -21,7 +21,7 @@ public class CacheAllShopsInteractor {
                 ShopDAO dao = new ShopDAO(context);
 
                 boolean success = true;
-                for (Shop shop: shops.allShops()) {
+                for (Shop shop: shops.all()) {
                     success = dao.insert(shop) > 0;
                     if (!success) {
                         break;

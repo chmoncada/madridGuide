@@ -1,9 +1,10 @@
 package com.charlesmoncada.madridguide.model;
 
+
 import java.util.List;
 
-public interface IShopsIterable {
+public interface Iterable<T> {
     long size();
-    Shop get(long index);
-    List<Shop> allShops();
+    T get(long index);
+    List<T> all();
 }

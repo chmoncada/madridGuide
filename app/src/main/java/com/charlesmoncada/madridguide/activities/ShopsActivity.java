@@ -12,6 +12,10 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.charlesmoncada.madridguide.R;
 import com.charlesmoncada.madridguide.fragments.ShopsFragment;
@@ -21,16 +25,15 @@ import com.charlesmoncada.madridguide.manager.db.provider.MadridGuideProvider;
 import com.charlesmoncada.madridguide.model.Shop;
 import com.charlesmoncada.madridguide.model.Shops;
 import com.charlesmoncada.madridguide.navigator.Navigator;
-import com.charlesmoncada.madridguide.views.MapInfoWindowAdapter;
+import com.charlesmoncada.madridguide.util.MapsUtils;
 import com.charlesmoncada.madridguide.util.OnElementClick;
-import com.google.android.gms.maps.CameraUpdateFactory;
+import com.charlesmoncada.madridguide.views.MapInfoWindowAdapter;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.List;
 
 public class ShopsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, OnMapReadyCallback {
 
@@ -50,6 +53,32 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
 
         LoaderManager loaderManager = getSupportLoaderManager();
         loaderManager.initLoader(0, null, this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_shop_detail_menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.activity_shop_detail_menu_search);
+
+        final SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchView.clearFocus();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                updateViews(newText);
+                return false;
+            }
+        });
+
+        return true;
     }
 
 //    // 1st attempt at async cursor load: works!
@@ -98,14 +127,10 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
 
         // Setup the List Recycler view Fragment
         setupShopsFragment(shops);
-
-
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }
+    public void onLoaderReset(Loader<Cursor> loader) { }
 
     private void setupShopsFragment(Shops shops) {
         shopsFragment.setOnElementClickListener(new OnElementClick<Shop>() {
@@ -114,8 +139,14 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
                 Navigator.navigateFromShopsActivityToShopDetailActivity(ShopsActivity.this, shop);
             }
         });
-
         shopsFragment.setShops(shops);
+    }
+
+    private void updateViews(String text) {
+        List<Shop> results = shops.query(text);
+        Shops resultsShop = Shops.build(results);
+        MapsUtils.updateMarkers(resultsShop, googleMap);
+        setupShopsFragment(resultsShop);
     }
 
     private void setupMap() {
@@ -126,10 +157,9 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
     @Override
     public void onMapReady(GoogleMap map) {
         googleMap = map;
-
         showUserPosition();
-        moveCameraToMadridCenter();
-        showShopMarkers();
+        MapsUtils.moveCameraToMadridCenter(googleMap);
+        MapsUtils.showMarkers(shops.all(), googleMap);
 
         googleMap.setInfoWindowAdapter(new MapInfoWindowAdapter(getLayoutInflater()));
 
@@ -141,24 +171,6 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
                 Navigator.navigateFromShopsActivityToShopDetailActivity(ShopsActivity.this, shop);
             }
         });
-
-    }
-
-    private void moveCameraToMadridCenter() {
-        CameraPosition cameraPosition = new CameraPosition.Builder().target(
-                new LatLng(40.417005,-3.703423)).zoom(12).build();
-        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-    }
-
-    public void showShopMarkers() {
-        for (Shop shop : shops.allShops()) {
-            float latitude = shop.getLatitude();
-            float longitude = shop.getLongitude();
-            LatLng position = new LatLng(latitude, longitude);
-            String name = shop.getName();
-            Marker marker = googleMap.addMarker(new MarkerOptions().position(position).title(name));
-            marker.setTag(shop);
-        }
     }
 
     private void showUserPosition() {
@@ -178,7 +190,6 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     showUserPosition();
                 }
-                return;
             }
         }
     }

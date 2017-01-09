@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.charlesmoncada.madridguide.model.MadridActivities;
 import com.charlesmoncada.madridguide.model.MadridActivity;
@@ -16,7 +15,18 @@ import java.lang.ref.WeakReference;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.charlesmoncada.madridguide.manager.db.DBConstants.*;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_ACTIVITY_ADDRESS;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_ACTIVITY_DESCRIPTION_EN;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_ACTIVITY_DESCRIPTION_ES;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_ACTIVITY_ID;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_ACTIVITY_IMAGE_URL;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_ACTIVITY_LATITUDE;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_ACTIVITY_LOGO_IMAGE_URL;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_ACTIVITY_LONGITUDE;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_ACTIVITY_NAME;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.KEY_ACTIVITY_URL;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.TABLE_ACTIVITY;
+import static com.charlesmoncada.madridguide.manager.db.DBConstants.TABLE_ACTIVITY_ALL_COLUMNS;
 
 public class ActivityDAO implements DAOPersistable<MadridActivity> {
 
@@ -103,7 +113,6 @@ public class ActivityDAO implements DAOPersistable<MadridActivity> {
     @Override
     public int deleteAll() {
         int result = db.delete(TABLE_ACTIVITY, null,null);// 2nd way
-        Log.v("DELETE ALL:", String.valueOf(result));
         //db.delete(TABLE_ACTIVITY, null, null);
 
         return result;

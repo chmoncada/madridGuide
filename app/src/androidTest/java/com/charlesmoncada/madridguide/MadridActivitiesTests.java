@@ -15,7 +15,7 @@ public class MadridActivitiesTests extends AndroidTestCase {
     public void testCreatingAMadridActivitiesWithNullListReturnNonNullMadridActivities() {
         MadridActivities sut = MadridActivities.build(null);
         assertNotNull(sut);
-        assertNotNull(sut.allActivities());
+        assertNotNull(sut.all());
     }
 
     public void testCreatingAMadridActivitiesWithAListReturnsNonNullMadridActivities() {
@@ -23,9 +23,9 @@ public class MadridActivitiesTests extends AndroidTestCase {
 
         MadridActivities sut = MadridActivities.build(data);
         assertNotNull(sut);
-        assertNotNull(sut.allActivities());
-        assertEquals(sut.allActivities(), data);
-        assertEquals(sut.allActivities().size(), data.size());
+        assertNotNull(sut.all());
+        assertEquals(sut.all(), data);
+        assertEquals(sut.all().size(), data.size());
     }
 
     @NonNull

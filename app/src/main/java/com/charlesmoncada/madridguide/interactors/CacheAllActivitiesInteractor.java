@@ -21,7 +21,7 @@ public class CacheAllActivitiesInteractor {
                 ActivityDAO dao = new ActivityDAO(context);
 
                 boolean success = true;
-                for (MadridActivity activity: activities.allActivities()) {
+                for (MadridActivity activity: activities.all()) {
                     success = dao.insert(activity) > 0;
                     if (!success) {
                         break;

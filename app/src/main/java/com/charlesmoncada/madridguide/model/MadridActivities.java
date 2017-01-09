@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MadridActivities implements IActivitiesIterable, IActivitiesUpdatable {
+public class MadridActivities implements Iterable, Updatable {
 
     List<MadridActivity> activities;
 
@@ -43,23 +43,26 @@ public class MadridActivities implements IActivitiesIterable, IActivitiesUpdatab
     }
 
     @Override
-    public List<MadridActivity> allActivities() {
+    public List<MadridActivity> all() {
         return activities;
     }
 
-
     @Override
-    public void add(MadridActivity activity) {
+    public void add(Object element) {
+        MadridActivity activity = (MadridActivity) element;
         activities.add(activity);
     }
 
     @Override
-    public void delete(MadridActivity activity) {
+    public void delete(Object element) {
+        MadridActivity activity = (MadridActivity) element;
         activities.remove(activity);
     }
 
     @Override
-    public void edit(MadridActivity newActivity, long index) {
+    public void edit(Object newElement, long index) {
+        MadridActivity newActivity = (MadridActivity) newElement;
         activities.set((int) index, newActivity);
     }
+
 }
