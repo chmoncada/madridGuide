@@ -38,18 +38,20 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopRowViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(ShopRowViewHolder row, final int position) {
+    public void onBindViewHolder(ShopRowViewHolder row, int position) {
 
         final Shop shop = shops.get(position);
 
         row.setShop(shop);
+
+        final int positionForListener = row.getAdapterPosition();
 
         row.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 for (OnElementClick<Shop> listener: getListeners()) {
-                    listener.elementClicked(shop, position);
+                    listener.elementClicked(shop, positionForListener);
                 }
             }
         });

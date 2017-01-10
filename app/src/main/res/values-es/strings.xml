@@ -13,4 +13,5 @@
     <string name="shops_url">http://madrid-shops.com/json_new/getShops.php</string>
     <string name="activities_url">"http://madrid-shops.com/json_new/getActivities.php "</string>
     <string name="splash_screen_dialog_text">Descargando la información, por favor no cierre la app</string>
+    <string name="activities_activity_title">ACTIVIDADES</string>
 </resources>

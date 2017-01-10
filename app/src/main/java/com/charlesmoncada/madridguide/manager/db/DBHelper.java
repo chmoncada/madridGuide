@@ -79,7 +79,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public static boolean convertIntToBoolean(int b) {
-        return b == 0 ? false : true;
+        return b != 0;
     }
 
 

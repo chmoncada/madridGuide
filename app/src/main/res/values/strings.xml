@@ -2,10 +2,14 @@
     <string name="app_name">MadridGuide</string>
     <string name="activity_main_shops_button_text">Shops</string>
     <string name="shops_activity_title">SHOPPING</string>
+    <string name="activities_activity_title">ACTIVITIES</string>
     <string name="activity_main_activities_button_text">Activities</string>
     <string name="main_activity_warning_title">Important!</string>
-    <string name="main_activity_warning_text">There is no Internet connection.  We are not able to download the info. Please get Internet connection and try again.</string>
+    <string name="main_activity_warning_text">There is no Internet connection. We are not able to
+        download the info. Please get Internet connection and try again.
+    </string>
     <string name="OK">OK</string>
-    <string name="splash_screen_dialog_text">Downloading information, please don\'t close the app</string>
+    <string name="splash_screen_dialog_text">Downloading information, please don\'t close the app
+    </string>
     <string name="search">Search</string>
 </resources>

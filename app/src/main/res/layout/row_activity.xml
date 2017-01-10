@@ -8,12 +8,10 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     xmlns:tools="http://schemas.android.com/tools"
-    >
-
-
+>
 
     <ImageView
-        android:id="@+id/row_shop_img"
+        android:id="@+id/row_activity_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
@@ -22,7 +20,7 @@
     />
 
     <ImageView
-        android:id="@+id/row_shop_logo"
+        android:id="@+id/row_activity_logo"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_width="80dp"
@@ -32,7 +30,7 @@
     />
 
     <TextView
-        android:id="@+id/row_shop_name"
+        android:id="@+id/row_activity_name"
         android:layout_width="140dp"
         android:background="#E4C863"
         android:textColor="@color/colorPrimary"

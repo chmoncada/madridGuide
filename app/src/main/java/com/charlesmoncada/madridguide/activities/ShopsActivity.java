@@ -38,7 +38,6 @@ import java.util.List;
 public class ShopsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>, OnMapReadyCallback {
 
     private ShopsFragment shopsFragment;
-    private SupportMapFragment mapFragment;
     private GoogleMap googleMap;
     private Shops shops;
 
@@ -80,27 +79,6 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
 
         return true;
     }
-
-//    // 1st attempt at async cursor load: works!
-//    public void getShops() {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                ShopDAO dao = new ShopDAO(ShopsActivity.this);
-//
-//                List<Shop> shopList = dao.query();
-//                final Shops shops = Shops.build(shopList);
-//
-//                ShopsActivity.this.runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        shopsFragment.setShops(shops);
-//                    }
-//                });
-//            }
-//        });
-//    }
-
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
@@ -150,7 +128,7 @@ public class ShopsActivity extends AppCompatActivity implements LoaderManager.Lo
     }
 
     private void setupMap() {
-        mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }
 

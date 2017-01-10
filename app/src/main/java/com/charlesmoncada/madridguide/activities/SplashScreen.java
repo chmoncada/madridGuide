@@ -15,9 +15,9 @@ import com.charlesmoncada.madridguide.util.NetworkUtils;
 
 public class SplashScreen extends AppCompatActivity {
 
-    boolean shopFinish = false;
-    boolean activityFinish = false;
-    ProgressDialog dialog;
+    private boolean shopFinish = false;
+    private boolean activityFinish = false;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

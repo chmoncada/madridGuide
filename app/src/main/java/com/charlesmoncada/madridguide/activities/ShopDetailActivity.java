@@ -60,16 +60,18 @@ public class ShopDetailActivity extends AppCompatActivity {
 
     private void updateUI() {
 
-        shopNameText.setText(shop.getName());
-        shopAddressText.setText(shop.getAddress());
+        if (shop != null) {
+            shopNameText.setText(shop.getName());
+            shopAddressText.setText(shop.getAddress());
 
-        if (MadridGuideApp.defSystemLanguage.equals("es")) {
-            shopDescriptionText.setText(shop.getDescriptionEs());
-        } else {
-            shopDescriptionText.setText(shop.getDescriptionEn());
+            if (MadridGuideApp.defSystemLanguage.equals("es")) {
+                shopDescriptionText.setText(shop.getDescriptionEs());
+            } else {
+                shopDescriptionText.setText(shop.getDescriptionEn());
+            }
+
+            showImagesOfDetailView();
         }
-
-        showImagesOfDetailView();
 
     }
 

@@ -47,7 +47,7 @@ public class ShopsFragment extends Fragment {
 
     private void updateUI() {
 
-        adapter = new ShopsAdapter(shops, getActivity());
+        adapter = new ShopsAdapter(getShops(), getActivity());
         shopsRecyclerView.setAdapter(adapter);
 
         adapter.setOnElementClickListener(new OnElementClick<Shop>() {

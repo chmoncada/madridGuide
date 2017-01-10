@@ -2,6 +2,7 @@ package com.charlesmoncada.madridguide.util;
 
 
 import com.charlesmoncada.madridguide.model.Iterable;
+import com.charlesmoncada.madridguide.model.MadridActivity;
 import com.charlesmoncada.madridguide.model.Shop;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -24,6 +25,7 @@ public class MapsUtils {
         for (T each : list) {
 
             Shop shopElement;
+            MadridActivity activityElement;
             float latitude = 0;
             float longitude = 0;
             String name = "";
@@ -33,6 +35,11 @@ public class MapsUtils {
                 latitude = shopElement.getLatitude();
                 longitude = shopElement.getLongitude();
                 name = shopElement.getName();
+            } else if (each instanceof MadridActivity) {
+                activityElement = (MadridActivity) each;
+                latitude = activityElement.getLatitude();
+                longitude = activityElement.getLongitude();
+                name = activityElement.getName();
             }
 
             LatLng position = new LatLng(latitude, longitude);
