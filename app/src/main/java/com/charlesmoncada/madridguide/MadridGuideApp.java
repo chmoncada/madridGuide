@@ -2,7 +2,6 @@ package com.charlesmoncada.madridguide;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.Locale;
@@ -20,15 +19,6 @@ public class MadridGuideApp extends Application {
         // init your app
         appContext = new WeakReference<Context>(getApplicationContext());
         defSystemLanguage = Locale.getDefault().getLanguage();
-        Log.v("MadridGuideApp", defSystemLanguage);
-
-//        Picasso.Builder builder = new Picasso.Builder(this);
-//        builder.downloader(new OkHttpDownloader(this,Integer.MAX_VALUE));
-//        Picasso built = builder.build();
-//        built.setIndicatorsEnabled(true);
-//        built.setLoggingEnabled(false);
-//        Picasso.setSingletonInstance(built);
-
 
     }
 

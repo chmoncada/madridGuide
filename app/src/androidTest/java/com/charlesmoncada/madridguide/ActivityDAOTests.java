@@ -36,7 +36,8 @@ public class ActivityDAOTests extends AndroidTestCase {
     }
 
     private long insertTestMadridActivity(ActivityDAO sut) {
-        final MadridActivity activity = new MadridActivity(1, MADRID_ACTIVITY_TESTING_NAME).setAddress(ADDRESS_TESTING);
+        final MadridActivity activity = new MadridActivity(1, MADRID_ACTIVITY_TESTING_NAME);
+        activity.setAddress(ADDRESS_TESTING);
         return sut.insert(activity);
     }
 

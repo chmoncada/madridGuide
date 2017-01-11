@@ -11,6 +11,4 @@ public class ProgressDialogUtils {
         dialog.setProgress(newProgress);
 
     }
-
-
 }

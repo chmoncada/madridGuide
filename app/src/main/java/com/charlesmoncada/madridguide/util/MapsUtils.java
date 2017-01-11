@@ -1,9 +1,8 @@
 package com.charlesmoncada.madridguide.util;
 
 
+import com.charlesmoncada.madridguide.model.EntityModel;
 import com.charlesmoncada.madridguide.model.Iterable;
-import com.charlesmoncada.madridguide.model.MadridActivity;
-import com.charlesmoncada.madridguide.model.Shop;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -21,34 +20,19 @@ public class MapsUtils {
         googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
 
-    public static <T> void showMarkers(List<T> list, GoogleMap googleMap) {
+    public static <T extends EntityModel> void showMarkers(List<T> list, GoogleMap googleMap) {
         for (T each : list) {
 
-            Shop shopElement;
-            MadridActivity activityElement;
-            float latitude = 0;
-            float longitude = 0;
-            String name = "";
-
-            if (each instanceof Shop) {
-                shopElement = (Shop) each;
-                latitude = shopElement.getLatitude();
-                longitude = shopElement.getLongitude();
-                name = shopElement.getName();
-            } else if (each instanceof MadridActivity) {
-                activityElement = (MadridActivity) each;
-                latitude = activityElement.getLatitude();
-                longitude = activityElement.getLongitude();
-                name = activityElement.getName();
-            }
-
+            float latitude = each.getLatitude();
+            float longitude = each.getLongitude();
+            String name = each.getName();
             LatLng position = new LatLng(latitude, longitude);
             Marker marker = googleMap.addMarker(new MarkerOptions().position(position).title(name));
             marker.setTag(each);
         }
     }
 
-    public static <T> void updateMarkers(Iterable<T> list, GoogleMap googleMap) {
+    public static <T extends EntityModel> void updateMarkers(Iterable<T> list, GoogleMap googleMap) {
         googleMap.clear();
         MapsUtils.showMarkers(list.all(),googleMap);
     }

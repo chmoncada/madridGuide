@@ -2,11 +2,11 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_marginLeft="0dp"
-    android:layout_marginRight="0dp"
-    android:layout_marginBottom="1dp"
+    android:layout_marginLeft="@dimen/activity_vertical_margin"
+    android:layout_marginRight="@dimen/activity_vertical_margin"
+    android:layout_marginBottom="@dimen/activity_row_bottom_margin"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="@dimen/activity_row_height"
     xmlns:tools="http://schemas.android.com/tools"
 >
 
@@ -21,20 +21,20 @@
 
     <ImageView
         android:id="@+id/row_activity_logo"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_marginStart="@dimen/activity_detail_textview_margin"
+        android:layout_marginLeft="@dimen/activity_detail_textview_margin"
+        android:layout_width="@dimen/activity_row_image_height"
+        android:layout_height="@dimen/activity_row_image_height"
         android:layout_centerVertical="true"
         tools:src="@android:drawable/btn_plus"
     />
 
     <TextView
         android:id="@+id/row_activity_name"
-        android:layout_width="140dp"
-        android:background="#E4C863"
+        android:layout_width="@dimen/activity_row_text_widht"
+        android:background="@color/colorBackgroundTextLabel"
         android:textColor="@color/colorPrimary"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/activity_row_text_height"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:gravity="center"

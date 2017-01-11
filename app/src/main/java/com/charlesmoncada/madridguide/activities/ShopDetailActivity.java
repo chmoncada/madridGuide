@@ -50,7 +50,6 @@ public class ShopDetailActivity extends AppCompatActivity {
 
     }
 
-
     private void getDetailShopFromCallingIntent() {
         Intent intent = getIntent();
         if (intent != null) {

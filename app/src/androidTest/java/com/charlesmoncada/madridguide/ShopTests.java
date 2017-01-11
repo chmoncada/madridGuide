@@ -24,10 +24,10 @@ public class ShopTests extends AndroidTestCase {
     }
 
     public void testANewShopStoresDataInPropertiesCorrectly() {
-        Shop sut = new Shop(11, SHOP)
-                .setAddress(ADDRESS)
-                .setDescriptionEn(DESC)
-                .setImageUrl(URL);
+        Shop sut = new Shop(11, SHOP);
+        sut.setAddress(ADDRESS);
+        sut.setDescriptionEn(DESC);
+        sut.setImageUrl(URL);
 
         assertEquals(sut.getAddress(), ADDRESS);
         assertEquals(sut.getDescriptionEn(), DESC);

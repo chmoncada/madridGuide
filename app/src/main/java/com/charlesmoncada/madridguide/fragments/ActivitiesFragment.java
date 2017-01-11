@@ -37,9 +37,6 @@ public class ActivitiesFragment extends Fragment {
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         activity.getSupportActionBar().setTitle(R.string.activities_activity_title);
-        //activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //updateUI();
 
         return view;
     }

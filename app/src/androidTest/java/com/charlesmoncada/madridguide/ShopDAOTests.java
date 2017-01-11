@@ -78,7 +78,8 @@ public class ShopDAOTests extends AndroidTestCase {
     }
 
     private long insertTestShop(ShopDAO sut) {
-        final Shop shop = new Shop(1, SHOP_TESTING_NAME).setAddress(ADDRESS_TESTING);
+        final Shop shop = new Shop(1, SHOP_TESTING_NAME);
+        shop.setAddress(ADDRESS_TESTING);
         return sut.insert(shop);
     }
 

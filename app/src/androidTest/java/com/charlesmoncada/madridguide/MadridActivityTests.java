@@ -32,15 +32,15 @@ public class MadridActivityTests extends AndroidTestCase {
 
     public void testANewMadridActivityStoresDataInPropertiesCorrectly() {
 
-        MadridActivity sut = new MadridActivity(ID, ACTIVITY)
-                .setImageUrl(IMAGE_URL)
-                .setLogoImgUrl(LOGO_IMAGE_URL)
-                .setAddress(ADDRESS)
-                .setUrl(URL)
-                .setDescriptionEs(DESCRIPTION_ES)
-                .setDescriptionEn(DESCRIPTION_EN)
-                .setLatitude(LATITUDE)
-                .setLongitude(LONGITUDE);
+        MadridActivity sut = new MadridActivity(ID, ACTIVITY);
+        sut.setImageUrl(IMAGE_URL);
+        sut.setLogoImgUrl(LOGO_IMAGE_URL);
+        sut.setAddress(ADDRESS);
+        sut.setUrl(URL);
+        sut.setDescriptionEs(DESCRIPTION_ES);
+        sut.setDescriptionEn(DESCRIPTION_EN);
+        sut.setLatitude(LATITUDE);
+        sut.setLongitude(LONGITUDE);
 
         assertEquals(sut.getImageUrl(), IMAGE_URL);
         assertEquals(sut.getLogoImgUrl(), LOGO_IMAGE_URL);

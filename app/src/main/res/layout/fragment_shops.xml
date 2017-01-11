@@ -6,7 +6,7 @@
     tools:context="com.charlesmoncada.madridguide.fragments.ShopsFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:background="#E4C863"
+        android:background="@color/colorBackgroundTextLabel"
         android:id="@+id/shops_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

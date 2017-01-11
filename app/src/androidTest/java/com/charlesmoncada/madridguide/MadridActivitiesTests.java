@@ -31,8 +31,15 @@ public class MadridActivitiesTests extends AndroidTestCase {
     @NonNull
     private List<MadridActivity> getMadridActivities() {
         List<MadridActivity> data = new ArrayList<>();
-        data.add(new MadridActivity(1, "1").setAddress("AD 1"));
-        data.add(new MadridActivity(2, "2").setAddress("AD 2"));
+        MadridActivity activity1 = new MadridActivity(1, "1");
+        activity1.setAddress("AD 1");
+        data.add(activity1);
+        MadridActivity activity2 = new MadridActivity(2, "2");
+        activity2.setAddress("AD 2");
+        data.add(activity2);
+
+        data.add(activity1);
+        data.add(activity2);
         return data;
     }
 
